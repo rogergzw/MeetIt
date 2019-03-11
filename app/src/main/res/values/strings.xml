@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MeetIt</string>
     <string name="welcomeback">Welcome back!</string>
+    <string name="whatisyourplan">What is your plan today?</string>
 </resources>
