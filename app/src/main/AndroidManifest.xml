@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SendingRequest"></activity>
+        <activity android:name=".RecieveRequest"></activity>
+        <activity android:name=".SendingRequest" />
         <activity android:name=".Planner" />
         <activity android:name=".Home">
             <intent-filter>
