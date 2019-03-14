@@ -15,6 +15,7 @@
         android:layout_marginTop="96dp"
         android:layout_marginEnd="8dp"
         android:background="#00000000"
+        android:onClick="goToSend"
         app:layout_constraintEnd_toStartOf="@+id/imageButton4"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:background="#00000000"
+        android:onClick="goToReceive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/recieve"
-        tools:ignore="ContentDescription" />
+        app:srcCompat="@drawable/receive"
+        tools:ignore="ContentDescription,OnClick" />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -39,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="#00000000"
+        android:onClick="goToLocation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/sharelocation"
@@ -62,7 +65,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/whatisyourplan"
+        android:text="What is your plan?"
         android:textAlignment="textStart"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
@@ -79,7 +82,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
-        android:background="#0000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,7 +3,7 @@ package com.example.meetit;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class RecieveRequest extends AppCompatActivity {
+public class ReceiveRequest extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
