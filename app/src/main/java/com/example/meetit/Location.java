@@ -45,11 +45,5 @@ public class Location extends AppCompatActivity {
             }
         };
 
-
-
-        public void showLocation() {
-            locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
-        }
-
     }
 }

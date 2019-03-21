@@ -4,4 +4,5 @@
     <string name="whatisyourplan">What is your plan today?</string>
     <string name="sendmeetingrequest">Send meeting request</string>
     <string name="receivemeetingrequest">Receive meeting request</string>
+    <string name="sharelocation">Share location</string>
 </resources>
