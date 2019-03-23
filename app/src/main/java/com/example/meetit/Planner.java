@@ -17,6 +17,7 @@ public class Planner extends AppCompatActivity {
 
         Button sendingrequest = findViewById(R.id.sendrequest_button);
         Button receiverequest = findViewById(R.id.receiverequest_button);
+        Button sharelocation = findViewById(R.id.sharelocation_button);
 
         sendingrequest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +31,14 @@ public class Planner extends AppCompatActivity {
             public void onClick(View v) {
                 openReceiveRequest();
             }
-         });
+        });
+
+        sharelocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLocation();
+            }
+        });
     }
 
      public void openSendingRequest() {
@@ -43,4 +51,8 @@ public class Planner extends AppCompatActivity {
             startActivity(intent);
          }
 
+     public void openLocation() {
+            Intent intent = new Intent(this, Location.class);
+            startActivity(intent);
+         }
     }
