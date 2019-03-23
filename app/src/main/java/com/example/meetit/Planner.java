@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class Planner extends AppCompatActivity {
     private Button sendingrequest_button;
+    private Button receiverequest_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,11 +16,19 @@ public class Planner extends AppCompatActivity {
         setContentView(R.layout.activity_planner);
 
         Button sendingrequest = findViewById(R.id.sendrequest_button);
+        Button receiverequest = findViewById(R.id.receiverequest_button);
 
         sendingrequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSendingRequest();
+            }
+        });
+
+        receiverequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openReceiveRequest();
             }
          });
     }
@@ -27,6 +36,11 @@ public class Planner extends AppCompatActivity {
      public void openSendingRequest() {
             Intent intent = new Intent(this, SendingRequest.class);
             startActivity(intent);
+         }
 
-     }
-}
+     public void openReceiveRequest() {
+            Intent intent = new Intent(this, ReceiveRequest.class);
+            startActivity(intent);
+         }
+
+    }
