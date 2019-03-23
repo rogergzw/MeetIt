@@ -4,24 +4,29 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class Planner extends AppCompatActivity {
+    private Button sendingrequest_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planner);
+
+        Button sendingrequest = findViewById(R.id.sendrequest_button);
+
+        sendingrequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSendingRequest();
+            }
+         });
     }
 
-    public void goToReceive(View view) {
-        startActivity(new Intent(this, ReceiveRequest.class));
-    }
+     public void openSendingRequest() {
+            Intent intent = new Intent(this, SendingRequest.class);
+            startActivity(intent);
 
-    public void goToSend(View view) {
-        startActivity(new Intent(this, SendingRequest.class));
-    }
-
-    public void goToLocation(View view) {
-        startActivity(new Intent(this, Location.class));
-    }
+     }
 }

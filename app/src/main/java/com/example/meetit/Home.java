@@ -26,7 +26,7 @@ public class Home extends AppCompatActivity {
      }
 
      public void openPlanner() {
-         Intent intent = new Intent(this, Planner.class);
-         startActivity(intent);
+            Intent intent = new Intent(this, Planner.class);
+            startActivity(intent);
     }
 }
