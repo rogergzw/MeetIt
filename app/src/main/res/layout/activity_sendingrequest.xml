@@ -4,30 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B8C8D3"
+    android:background="#393D3F"
     tools:context=".SendingRequest">
-
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="354dp"
-        android:layout_height="475dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/groupcard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
         android:text="@string/sendmeetingrequest"
         android:textAllCaps="true"
@@ -35,7 +20,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
