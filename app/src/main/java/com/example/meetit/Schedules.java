@@ -3,11 +3,11 @@ package com.example.meetit;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MapOverview extends AppCompatActivity {
+public class Schedules extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_overview);
+        setContentView(R.layout.activity_schedules);
     }
 }
