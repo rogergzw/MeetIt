@@ -8,7 +8,7 @@
     tools:context=".SendingRequest">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/send_title"
         android:layout_width="300dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
