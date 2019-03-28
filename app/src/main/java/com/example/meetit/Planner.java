@@ -19,6 +19,7 @@ public class Planner extends AppCompatActivity {
         Button receiverequest = findViewById(R.id.receiverequest_button);
         Button sharelocation = findViewById(R.id.sharelocation_button);
         Button planoverview = findViewById(R.id.planoverview_button);
+        Button userprofile = findViewById(R.id.userprofile_button);
 
         sendingrequest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +38,7 @@ public class Planner extends AppCompatActivity {
         sharelocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLocation();
+                openGPSLocation();
             }
         });
 
@@ -45,6 +46,13 @@ public class Planner extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openSchedules();
+            }
+        });
+
+        userprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUserProfile();
             }
         });
     }
@@ -59,14 +67,18 @@ public class Planner extends AppCompatActivity {
             startActivity(intent);
          }
 
-     public void openLocation() {
-            Intent intent = new Intent(this, Location.class);
+     public void openGPSLocation() {
+            Intent intent = new Intent(this, GPSLocation.class);
             startActivity(intent);
          }
 
      public void openSchedules() {
             Intent intent = new Intent(this,Schedules.class);
             startActivity(intent);
-        }
+         }
 
+     public void openUserProfile() {
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
+         }
     }

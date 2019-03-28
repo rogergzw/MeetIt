@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class Location extends AppCompatActivity {
+public class GPSLocation extends AppCompatActivity {
 
     private TextView locationTV;
     private LocationManager locationManager;
