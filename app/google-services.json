@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "312444407145",
+    "firebase_url": "https://meetit-2fdef.firebaseio.com",
+    "project_id": "meetit-2fdef",
+    "storage_bucket": "meetit-2fdef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312444407145:android:920fcc5ebd2dd969",
+        "android_client_info": {
+          "package_name": "com.example.meetit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312444407145-5g22mhlepjdnuge9sio5av6c394mpbfr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meetit",
+            "certificate_hash": "b53b4924f473b6aaa6e02ea57cd153dbb20ac14a"
+          }
+        },
+        {
+          "client_id": "312444407145-pnrngbo4ia29460d24n2ag5slgnsjo20.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtLnM0IEukUEbHtAPXy1DZLXZ-A2TCMPw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312444407145-pnrngbo4ia29460d24n2ag5slgnsjo20.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
