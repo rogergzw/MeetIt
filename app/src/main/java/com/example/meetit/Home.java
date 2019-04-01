@@ -22,8 +22,8 @@ import java.util.Arrays;
 public class Home extends AppCompatActivity {
     private Button signin_button;
 
-    FirebaseDatabase mFirebaseDatabase;
-    DatabaseReference mMeetingRequestDatabaseReference;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mMeetingRequestDatabaseReference;
 
 
 

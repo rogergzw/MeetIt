@@ -5,14 +5,15 @@ import java.util.Date;
 public class MeetingRequest {
 
     private String title;
-    private Date time;
+    private String dateTime;
     private String location;
     private String notes;
 
-    public MeetingRequest(String title, Date time, String location) {
+    public MeetingRequest(String title, String dateTime, String location, String notes) {
         this.title = title;
-        this.time = time;
+        this.dateTime = dateTime;
         this.location = location;
+        this.notes = notes;
     }
 
     public String getTitle() {
@@ -23,12 +24,12 @@ public class MeetingRequest {
         this.title = title;
     }
 
-    public Date getTime() {
-        return time;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getLocation() {

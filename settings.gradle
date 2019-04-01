@@ -1,1 +1,3 @@
-include ':app'
+include ':app', ':slideDateTimePickerSample', ':slideDateTimePicker'
+project(':slideDateTimePickerSample').projectDir = new File('modules/SlideDateTimePicker-master/slideDateTimePickerSample')
+project(':slideDateTimePicker').projectDir = new File('modules/SlideDateTimePicker-master/slideDateTimePicker')
