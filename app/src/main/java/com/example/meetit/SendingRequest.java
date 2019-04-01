@@ -13,4 +13,10 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 public class SendingRequest extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sendingrequest);
+    }
 }
