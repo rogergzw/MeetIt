@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">MeetIt</string>
-    <string name="selectdate">select date</string>
-    <string name="whatisyourplan">What is your plan today?</string>
-    <string name="sendmeetingrequest">Send meeting request</string>
-    <string name="receivemeetingrequest">Receive meeting request</string>
-    <string name="sharelocation">Share location</string>
-
+    <string name="janedoe">Jane Doe</string>
+    <string name="country">Eindhoven, NL</string>
+    <string name="placeofstudy">Place of study</string>
+    <string name="field">Field</string>
+    <string name="levelofstudy">Level of study</string>
 
 </resources>

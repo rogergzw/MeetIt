@@ -20,8 +20,6 @@ public class GPSLocation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        locationTV = (TextView) findViewById(R.id.locationTV);
-
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
