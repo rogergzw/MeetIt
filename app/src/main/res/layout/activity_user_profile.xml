@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/country" />
 
     <TextView
-        android:id="@+id/placeofstudy2"
+        android:id="@+id/field"
         android:layout_width="77dp"
         android:layout_height="15dp"
         android:layout_marginStart="8dp"
@@ -121,7 +121,7 @@
         app:layout_constraintTop_toBottomOf="@+id/placeofstudybox" />
 
     <TextView
-        android:id="@+id/placeofstudy3"
+        android:id="@+id/levelofstudy"
         android:layout_width="77dp"
         android:layout_height="15dp"
         android:layout_marginStart="8dp"
