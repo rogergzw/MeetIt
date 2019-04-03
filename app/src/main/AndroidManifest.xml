@@ -19,7 +19,7 @@
         <activity android:name=".ReceiveRequest" />
         <activity android:name=".SendingRequest" />
         <activity android:name=".Planner" />
-        <activity android:name=".Home">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

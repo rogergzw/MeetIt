@@ -8,12 +8,14 @@ public class MeetingRequest {
     private String dateTime;
     private String location;
     private String notes;
+    private Boolean accepted;
 
-    public MeetingRequest(String title, String dateTime, String location, String notes) {
+    public MeetingRequest(String title, String dateTime, String location, String notes, Boolean accepted) {
         this.title = title;
         this.dateTime = dateTime;
         this.location = location;
         this.notes = notes;
+        this.accepted = accepted;
     }
 
     public String getTitle() {
@@ -46,5 +48,13 @@ public class MeetingRequest {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Boolean getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
     }
 }

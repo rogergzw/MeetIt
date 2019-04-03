@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,14 +28,21 @@ public class SendingRequest extends AppCompatActivity {
     EditText txtDate, txtTime, txtTitle, txtLocation, txtNotes;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private String dateTime;
+    private Boolean accepted;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendingrequest);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            email = user.getDisplayName();
+        }
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mMeetingRequestDatabaseReference = mFirebaseDatabase.getReference().child("meetingrequests");
+        mMeetingRequestDatabaseReference = mFirebaseDatabase.getReference().child(email).child("out");
 
         txtTitle = (EditText) findViewById(R.id.title);
 
@@ -97,7 +106,7 @@ public class SendingRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dateTime = txtDate.getText().toString() + " " + txtTime.getText().toString();
-                MeetingRequest request = new MeetingRequest(txtTitle.getText().toString(), dateTime, txtLocation.getText().toString(), txtNotes.getText().toString());
+                MeetingRequest request = new MeetingRequest(txtTitle.getText().toString(), dateTime, txtLocation.getText().toString(), txtNotes.getText().toString(), false);
                 mMeetingRequestDatabaseReference.push().setValue(request);
                 txtTime.setText("");
                 txtDate.setText("");
