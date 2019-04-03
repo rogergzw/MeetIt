@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -105,7 +106,10 @@ public class SendingRequest extends AppCompatActivity {
                 txtNotes.setText("");
                 txtTitle.setText("");
 
-                Toast.makeText(SendingRequest.this, "Meeting request sent!", Toast.LENGTH_SHORT).show();
+                Toast toast= Toast.makeText(getApplicationContext(),
+                        "Meeting Request Sent!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 100);
+                toast.show();
             }
         });
     }
