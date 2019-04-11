@@ -58,7 +58,7 @@ public class Planner extends AppCompatActivity {
     }
 
      public void openSendingRequest() {
-            Intent intent = new Intent(this, SendingRequest.class);
+            Intent intent = new Intent(this, SelectUser.class);
             startActivity(intent);
          }
 
