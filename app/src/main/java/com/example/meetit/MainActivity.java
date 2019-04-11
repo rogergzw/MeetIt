@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_mainactivity);
 
-        Button signin_button = findViewById(R.id.signin_button);
+        signin_button = findViewById(R.id.signin_button);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("user");
+        mDatabaseReference = mFirebaseDatabase.getReference();
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Toast.makeText(MainActivity.this, "You are now logged in. Welcome to MeetIt!", Toast.LENGTH_SHORT).show();
-                    onSignedInInitialize(user.getDisplayName());
+                    onSignedInInitialize(user.getUid(), user.getEmail(), user.getDisplayName());
                     openPlanner();
                 } else {
                     onSignedOutCleanup();
@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                                 .createSignInIntentBuilder()
                                 .setIsSmartLockEnabled(false)
                                 .setAvailableProviders(Arrays.asList(
-                                        new AuthUI.IdpConfig.GoogleBuilder().build(),
                                         new AuthUI.IdpConfig.EmailBuilder().build()))
                                 .build(),
                         RC_SIGN_IN);
@@ -106,15 +105,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void onSignedInInitialize(String username) {
+    private void onSignedInInitialize(String uid, String email, String username) {
         mUsername = username;
-        if (mDatabaseReference.equalTo(username) == null) {
-            mDatabaseReference.setValue(username);
-        }
+        User currentUser = new User(email, username, uid);
+        mDatabaseReference = mDatabaseReference.child("user").child(uid);
+        mDatabaseReference.setValue(currentUser);
         openPlanner();
 //        attachDatabaseReadListener();
     }
-
     private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
 //        openHome();

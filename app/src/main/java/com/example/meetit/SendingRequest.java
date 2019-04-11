@@ -2,6 +2,9 @@ package com.example.meetit;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,26 +12,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class SendingRequest extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMeetingRequestDatabaseReference;
+    private ChildEventListener mChildEventListener;
 
     Button btnDatePicker, btnTimePicker, btnSubmit;
-    EditText txtDate, txtTime, txtTitle, txtLocation, txtNotes;
+    EditText txtDate, txtTime, txtTitle, txtLocation;
+    TextView txtTo;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private String dateTime;
+    private String to;
+    private String toUid;
     private Boolean accepted;
     private String email;
 
@@ -37,13 +50,10 @@ public class SendingRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendingrequest);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            email = user.getDisplayName();
-        }
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mMeetingRequestDatabaseReference = mFirebaseDatabase.getReference().child(email).child("out");
+        mMeetingRequestDatabaseReference = mFirebaseDatabase.getReference().child("user");
 
         txtTitle = (EditText) findViewById(R.id.title);
 
@@ -51,9 +61,14 @@ public class SendingRequest extends AppCompatActivity {
         btnTimePicker=(Button)findViewById(R.id.btn_time);
         txtDate=(EditText)findViewById(R.id.in_date);
         txtTime=(EditText)findViewById(R.id.in_time);
-        txtLocation=(EditText)findViewById(R.id.location);
-        txtNotes=(EditText)findViewById(R.id.notes);
         btnSubmit = (Button) findViewById(R.id.submit);
+
+        txtTo = (TextView) findViewById(R.id.sendingto);
+
+        Intent intent = getIntent();
+        to = intent.getStringExtra("displayName");
+        toUid = intent.getStringExtra("uid");
+        txtTo.setText("Meeting with " + to);
 
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,12 +122,16 @@ public class SendingRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dateTime = txtDate.getText().toString() + " " + txtTime.getText().toString();
-                MeetingRequest request = new MeetingRequest(txtTitle.getText().toString(), dateTime, txtLocation.getText().toString(), txtNotes.getText().toString(), false);
-                mMeetingRequestDatabaseReference.push().setValue(request);
+
+                MeetingRequest request = new MeetingRequest(txtTitle.getText().toString(), toUid, user.getUid(), dateTime, "Atlas", false, null);
+
+                mMeetingRequestDatabaseReference.child(user.getUid()).child("Planning").push().setValue(request);
+                String requestKey = mMeetingRequestDatabaseReference.child(user.getUid()).child("Planning").getKey();
+                request.setKey(requestKey);
+                mMeetingRequestDatabaseReference.child(toUid).child("incoming").push().setValue(request);
+
                 txtTime.setText("");
                 txtDate.setText("");
-                txtLocation.setText("");
-                txtNotes.setText("");
                 txtTitle.setText("");
 
                 Toast toast= Toast.makeText(getApplicationContext(),

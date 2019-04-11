@@ -5,17 +5,21 @@ import java.util.Date;
 public class MeetingRequest {
 
     private String title;
+    private String to;
+    private String from;
     private String dateTime;
     private String location;
-    private String notes;
     private Boolean accepted;
+    private String key;
 
-    public MeetingRequest(String title, String dateTime, String location, String notes, Boolean accepted) {
+    public MeetingRequest(String title, String to, String from, String dateTime, String location, Boolean accepted, String key) {
         this.title = title;
+        this.to = to;
+        this.from = from;
         this.dateTime = dateTime;
         this.location = location;
-        this.notes = notes;
         this.accepted = accepted;
+        this.key = key;
     }
 
     public String getTitle() {
@@ -24,6 +28,22 @@ public class MeetingRequest {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getFrom() {
+        return from;
     }
 
     public String getDateTime() {
@@ -42,19 +62,19 @@ public class MeetingRequest {
         this.location = location;
     }
 
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
     public Boolean getAccepted() {
         return accepted;
     }
 
     public void setAccepted(Boolean accepted) {
         this.accepted = accepted;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
     }
 }

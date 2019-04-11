@@ -5,8 +5,8 @@
     <string name="placeofstudy">Place of study</string>
     <string name="field">Field</string>
     <string name="levelofstudy">Level of study</string>
-    <string name="meetingtitle">Title</string>
-    <string name="meetinglocation">Location</string>
-    <string name="meetingnotes">Notes</string>
+    <string name="meetingwith">Meeting with:</string>
+    <string name="meetinglocation">Title</string>
+    <string name="title_activity_select_user">SelectUser</string>
 
 </resources>
