@@ -9,10 +9,16 @@ public class MeetingRequest {
     private String from;
     private String dateTime;
     private String location;
-    private Boolean accepted;
+    private int accepted;
     private String key;
+    private String with;
 
-    public MeetingRequest(String title, String to, String from, String dateTime, String location, Boolean accepted, String key) {
+    //Class which is used to store and retrieve meeting requests from and to the database
+
+    public MeetingRequest() {
+    }
+
+    public MeetingRequest(String title, String to, String from, String dateTime, String location, int accepted, String key, String with) {
         this.title = title;
         this.to = to;
         this.from = from;
@@ -20,6 +26,7 @@ public class MeetingRequest {
         this.location = location;
         this.accepted = accepted;
         this.key = key;
+        this.with = with;
     }
 
     public String getTitle() {
@@ -62,11 +69,11 @@ public class MeetingRequest {
         this.location = location;
     }
 
-    public Boolean getAccepted() {
+    public int getAccepted() {
         return accepted;
     }
 
-    public void setAccepted(Boolean accepted) {
+    public void setAccepted(int accepted) {
         this.accepted = accepted;
     }
 
@@ -76,5 +83,13 @@ public class MeetingRequest {
 
     public String getKey() {
         return key;
+    }
+
+    public void setWith(String with) {
+        this.with = with;
+    }
+
+    public String getWith() {
+        return with;
     }
 }

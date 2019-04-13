@@ -22,14 +22,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+//In this activity, a list of existing users is displayed, and one can be selected to send a meetingrequest to.
+
 public class SelectUser extends AppCompatActivity {
 
+    //Initialize variables
     private FirebaseDatabase mFirebasedatabase;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mAuth;
@@ -41,20 +42,27 @@ public class SelectUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_user);
 
+        //Initialise database
         mFirebasedatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebasedatabase.getReference().child("user");
+
+        //Initialize auth
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
+        //Initialize listview
         ListView mListView = findViewById(R.id.userlist);
-
         final ArrayList<User> users = new ArrayList<>();
+
+        //Initialize adapter
         mUserListAdapter = new UserListAdapter(this, R.layout.userlistitem, users);
         mListView.setAdapter(mUserListAdapter);
 
+        //Listener that checks whether data at the reference point has changed
         userListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                //When the user object is different from the current user, add listitem to the listview
                 User user = dataSnapshot.getValue(User.class);
                 String uid = dataSnapshot.getKey();
                 if (!uid.equals(firebaseUser.getUid())) {
@@ -83,8 +91,10 @@ public class SelectUser extends AppCompatActivity {
             }
         };
 
+        //Attach listener
         mDatabaseReference.addChildEventListener(userListener);
 
+        //When a list item is clicked, get the data from the listitem and go to the next screen
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -92,12 +102,12 @@ public class SelectUser extends AppCompatActivity {
                 TextView view2 = (TextView)view.findViewById(R.id.uid);
                 String name = view1.getText().toString();
                 String uid = view2.getText().toString();
-                Toast.makeText(getBaseContext(), name, Toast.LENGTH_LONG).show();
                 goToSendingRequest(name, uid);
             }
         });
     }
 
+    //Method that lets the user go to the next screen while passing the data of the user that was selected.
     private void goToSendingRequest(String name, String uid) {
         Intent intent = new Intent(this, SendingRequest.class);
         intent.putExtra("displayName", name);
