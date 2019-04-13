@@ -1,3 +1,4 @@
+
 package com.example.meetit;
 
 import android.content.Intent;
@@ -16,17 +17,21 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
+//First screen you see when opening the app. It leads the users through the register / sign in process
+
 public class MainActivity extends AppCompatActivity {
+
+    //Defining signin button
     private Button signin_button;
 
+    //Defining firebaseauth variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    public static final String ANONYMOUS = "anonymous";
+    //Defining requestcode for the signin completionlistener
     public static final int RC_SIGN_IN = 1;
 
-    public static String mUsername;
-
+    //Defining firebasedatabase variables
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
 
@@ -35,26 +40,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainactivity);
 
+        //Initializing siginin button
         signin_button = findViewById(R.id.signin_button);
 
+        //Initializing database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
 
+        // Initializing auth
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+        //Authstatelistener listens to changes in the status of the user (signed in or not signed in) and triggers when attached or when a user signs in or out
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Toast.makeText(MainActivity.this, "You are now logged in. Welcome to MeetIt!", Toast.LENGTH_SHORT).show();
+                    //method that saves the user's data in the database and sends them on to the next screen when logged in
                     onSignedInInitialize(user.getUid(), user.getEmail(), user.getDisplayName());
-                    openPlanner();
-                } else {
-                    onSignedOutCleanup();
                 }
             }
         };
 
+        //When the signin button is pressed, this code runs. It starts the signin flow provided by firebaseauth with a completion callback.
         signin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         });
      }
 
+    //callback listener for when signing in goes wrong or is aborted.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -81,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
     @Override
     protected void onPause() {
@@ -100,21 +109,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
     }
 
-    public void openHome() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
+    //Method that writes the current user to the database without overwriting existing meetingrequests and sends the user on to the next screen.
     private void onSignedInInitialize(String uid, String email, String username) {
-        mUsername = username;
         User currentUser = new User(email, username, uid);
         mDatabaseReference = mDatabaseReference.child("user").child(uid);
-        mDatabaseReference.setValue(currentUser);
+        mDatabaseReference.child("username").setValue(currentUser.getUsername());
+        mDatabaseReference.child("email").setValue(currentUser.getEmail());
+        mDatabaseReference.child("uid").setValue(currentUser.getUid());
         openPlanner();
-//        attachDatabaseReadListener();
-    }
-    private void onSignedOutCleanup() {
-        mUsername = ANONYMOUS;
-//        openHome();
     }
 }

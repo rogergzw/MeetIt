@@ -28,48 +28,55 @@ import com.google.firebase.database.Query;
 import org.w3c.dom.Text;
 
 import java.util.Calendar;
+import java.util.Random;
+
+//In this actitvity, users can input a name, time and date for the meetingrequest that they can send to the user that was selected in the previous activity.
 
 public class SendingRequest extends AppCompatActivity {
 
+    //Define database variables
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMeetingRequestDatabaseReference;
-    private ChildEventListener mChildEventListener;
 
+    //Define buttons and views
     Button btnDatePicker, btnTimePicker, btnSubmit;
-    EditText txtDate, txtTime, txtTitle, txtLocation;
+    EditText txtDate, txtTime, txtTitle;
     TextView txtTo;
+
+    //Define variables
     private int mYear, mMonth, mDay, mHour, mMinute;
     private String dateTime;
     private String to;
     private String toUid;
-    private Boolean accepted;
-    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendingrequest);
 
+        //Get current firebaseuser
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        //Initialize database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMeetingRequestDatabaseReference = mFirebaseDatabase.getReference().child("user");
 
+        //Initialize views and buttons
         txtTitle = (EditText) findViewById(R.id.title);
-
         btnDatePicker=(Button)findViewById(R.id.btn_date);
         btnTimePicker=(Button)findViewById(R.id.btn_time);
         txtDate=(EditText)findViewById(R.id.in_date);
         txtTime=(EditText)findViewById(R.id.in_time);
         btnSubmit = (Button) findViewById(R.id.submit);
-
         txtTo = (TextView) findViewById(R.id.sendingto);
 
+        //Get data about the user to which the request is being sent from the previous activity
         Intent intent = getIntent();
         to = intent.getStringExtra("displayName");
         toUid = intent.getStringExtra("uid");
         txtTo.setText("Meeting with " + to);
 
+        //Datepicker
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +102,7 @@ public class SendingRequest extends AppCompatActivity {
             }
         });
 
+        //Timepicker
         btnTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,18 +126,32 @@ public class SendingRequest extends AppCompatActivity {
             }
         });
 
+        //Send request button
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Convert the date and time to a single string
                 dateTime = txtDate.getText().toString() + " " + txtTime.getText().toString();
 
-                MeetingRequest request = new MeetingRequest(txtTitle.getText().toString(), toUid, user.getUid(), dateTime, "Atlas", false, null);
+                //Get random meeting location
+                String location = randomLocation();
 
-                mMeetingRequestDatabaseReference.child(user.getUid()).child("Planning").push().setValue(request);
-                String requestKey = mMeetingRequestDatabaseReference.child(user.getUid()).child("Planning").getKey();
-                request.setKey(requestKey);
-                mMeetingRequestDatabaseReference.child(toUid).child("incoming").push().setValue(request);
+                //Create meetingrequest object with the data from the sendingrequest form
+                MeetingRequest request = new MeetingRequest(txtTitle.getText().toString(), toUid, user.getUid(), dateTime, location, 1, null, to);
 
+                //Generate key used to store the meetingrequests
+                String requestkey = mMeetingRequestDatabaseReference.push().getKey();
+                request.setKey(requestkey);
+
+                //Write the meetingrequest to the database in the planning node of the current user
+                mMeetingRequestDatabaseReference.child(user.getUid()).child("planning").child(requestkey).setValue(request);
+
+                //Edit the meetingrequest object for the recipient, so they can see who they are meeting with
+                request.setWith(user.getDisplayName());
+                //Write the meetingrequest to the database in the incoming node of the recipient of the meetingrequest
+                mMeetingRequestDatabaseReference.child(toUid).child("incoming").child(requestkey).setValue(request);
+
+                //Clear input fields
                 txtTime.setText("");
                 txtDate.setText("");
                 txtTitle.setText("");
@@ -138,7 +160,39 @@ public class SendingRequest extends AppCompatActivity {
                         "Meeting Request Sent!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 100);
                 toast.show();
+
+                //Send the user back to the main screen
+                Intent intent = new Intent(SendingRequest.this, Planner.class);
+                startActivity(intent);
             }
         });
+    }
+
+    //Random location generator
+    public String randomLocation() {
+        Random rand = new Random();
+        int selector = rand.nextInt(9);
+        switch (selector) {
+            case 0:
+                return "Atlas";
+            case 1:
+                return "Gemini";
+            case 2:
+                return "Luna";
+            case 3:
+                return "MetaForum";
+            case 4:
+                return "Paviljoen";
+            case 5:
+                return "IPO";
+            case 6:
+                return "Matrix";
+            case 7:
+                return "Flux";
+            case 8:
+                return "Traverse";
+            default:
+                return "";
+        }
     }
 }

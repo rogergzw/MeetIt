@@ -48,19 +48,6 @@
         app:layout_constraintTop_toBottomOf="@+id/sendrequest_button" />
 
     <Button
-        android:id="@+id/sharelocation_button"
-        android:layout_width="340dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/sharelocation_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/receiverequest_button" />
-
-    <Button
         android:id="@+id/planoverview_button"
         android:layout_width="340dp"
         android:layout_height="78dp"
@@ -70,17 +57,18 @@
         android:background="@drawable/planoverview_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sharelocation_button" />
+        app:layout_constraintTop_toBottomOf="@+id/receiverequest_button" />
 
     <Button
-        android:id="@+id/userprofile_button"
-        android:layout_width="340dp"
-        android:layout_height="78dp"
+        android:id="@+id/signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/userprofile_button"
+        android:text="Sign out"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/planoverview_button" />
 

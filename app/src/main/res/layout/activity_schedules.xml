@@ -23,4 +23,14 @@
         tools:layout_editor_absoluteY="145dp"
         tools:ignore="ContentDescription" />
 
+    <ListView
+        android:id="@+id/meetinglist"
+        android:layout_width="395dp"
+        android:layout_height="534dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedules" />
+
 </android.support.constraint.ConstraintLayout>

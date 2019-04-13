@@ -1,5 +1,7 @@
 package com.example.meetit;
 
+//Class that is used for storing user data.
+
 public class User {
 
     private String email;
